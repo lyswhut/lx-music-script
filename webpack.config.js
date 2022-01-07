@@ -43,7 +43,7 @@ module.exports = {
 // @version      ${packageJson.version}
 // @author       ${packageJson.author}
 // @description  ${packageJson.description}
-// @@homepage    ${packageJson.homepage}
+// @homepage     ${packageJson.homepage}
 // @supportURL   ${packageJson.bugs.url}${generateMaths()}
 // @run-at       document-start
 // @noframes
