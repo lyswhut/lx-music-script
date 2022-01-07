@@ -1,6 +1,6 @@
 import { sizeFormate, formatPlayTime, requestHook, openApp } from '@/utils'
 
-let data = {}
+let data = null
 
 const getSinger = (singers) => {
   let arr = []

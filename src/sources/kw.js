@@ -1,6 +1,6 @@
 import { decodeName, formatPlayTime, requestHook, openApp } from '@/utils'
 
-let data = {}
+let data = null
 
 
 export const formatSinger = rawData => rawData.replace(/&/g, '、')

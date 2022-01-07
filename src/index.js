@@ -9,6 +9,10 @@ switch (window.location.hostname) {
     sources.tx()
     break
 
+  case 'music.migu.cn':
+    sources.mg()
+    break
+
   default:
     break
 }

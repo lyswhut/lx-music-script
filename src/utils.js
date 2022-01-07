@@ -64,4 +64,32 @@ export const openApp = (type, action, data) => {
   dom_a.click()
 }
 
+export const request = (method, url, data) => {
+  const xhr = new window.XMLHttpRequest()
+  xhr.open(method, url)
+  xhr.addEventListener('load', function() {
+    let response
+    try {
+      response = JSON.parse(this.responseText)
+    } catch (err) {
+      _resolve(this.responseText)
+    }
+    _resolve(response)
+  })
+  xhr.addEventListener('error', function(err) {
+    _reject(err)
+  })
+  let _resolve
+  let _reject
+  if (method && method.toUpperCase() === 'POST') {
+    xhr.send(data)
+  } else {
+    xhr.send()
+  }
+  return new Promise((resolve, reject) => {
+    _resolve = resolve
+    _reject = reject
+  })
+}
+
 export const wait = time => new Promise(resolve => setTimeout(resolve, time))

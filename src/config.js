@@ -9,6 +9,8 @@ exports.matchs = [
   // tx
   '*://y.qq.com/*',
 
+  // mg
+  '*://music.migu.cn/*',
 
 ]
 
