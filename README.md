@@ -10,6 +10,9 @@ lx-msuic 辅助脚本，提供在官方平台歌单、歌曲详情页直接调�
 
 在安装 Tampermonkey 扩展后，你可以去[Greasyfork](https://greasyfork.org/zh-CN/scripts/438148-lx-msuic-%E8%BE%85%E5%8A%A9%E8%84%9A%E6%9C%AC)安装此载本。
 
+## 使用
+
+进入歌单详情页、歌曲详情页时将会自动显示相关操作按钮。
 
 ## LICENSE
 
