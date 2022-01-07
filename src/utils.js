@@ -64,9 +64,14 @@ export const openApp = (type, action, data) => {
   dom_a.click()
 }
 
-export const request = (method, url, data) => {
+export const request = (method, url, data, headers) => {
   const xhr = new window.XMLHttpRequest()
   xhr.open(method, url)
+  if (headers) {
+    for (const [key, value] of Object.entries(headers)) {
+      xhr.setRequestHeader(key, value)
+    }
+  }
   xhr.addEventListener('load', function() {
     let response
     try {

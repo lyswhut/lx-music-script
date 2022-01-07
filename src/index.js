@@ -9,6 +9,10 @@ switch (window.location.hostname) {
     sources.tx()
     break
 
+  case 'music.163.com':
+    sources.wy()
+    break
+
   case 'music.migu.cn':
     sources.mg()
     break
