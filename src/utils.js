@@ -2,7 +2,7 @@ export const requestHook = (callback) => {
   let oldXHROpen = window.XMLHttpRequest.prototype.open
   window.XMLHttpRequest.prototype.open = function(method, url) {
     // do something with the method, url and etc.
-    this.url = url
+    this._url = url
     // this.addEventListener('load', function () {
     //   // do something with the response text
     //   console.log('load: ' + url)
@@ -17,8 +17,8 @@ export const requestHook = (callback) => {
   window.XMLHttpRequest.prototype.send = function(data) {
     this.addEventListener('load', function() {
       // do something with the response text
-      console.log('load: ' + data)
-      console.log(JSON.parse(this.responseText))
+      // console.log('load: ' + data)
+      // console.log(JSON.parse(this.responseText))
       try {
         callback(this._url, data, JSON.parse(this.responseText))
       } catch (_) {}
@@ -47,6 +47,16 @@ export const formatPlayTime = (time) => {
     ? '--/--'
     : (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s)
 }
+
+const encodeNames = {
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&quot;': '"',
+  '&apos;': "'",
+  '&#039;': "'",
+}
+export const decodeName = (str = '') => str?.replace(/(?:&amp;|&lt;|&gt;|&quot;|&apos;|&#039;)/gm, s => encodeNames[s]) || ''
 
 export const openApp = (type, action, data) => {
   const dom_a = document.createElement('a')

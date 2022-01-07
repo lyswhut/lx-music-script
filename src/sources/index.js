@@ -1,4 +1,4 @@
-// import kw from './kw'
+import kw from './kw'
 // import kg from './kg'
 import tx from './tx'
 // import wy from './wy'
@@ -6,7 +6,7 @@ import tx from './tx'
 
 
 export default {
-  // kw,
+  kw,
   // kg,
   tx,
   // wy,

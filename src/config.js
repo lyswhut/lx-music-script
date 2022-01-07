@@ -3,8 +3,11 @@
 // 匹配的URL
 // https://www.tampermonkey.net/documentation.php#_match
 exports.matchs = [
+  // kw
+  '*://*.kuwo.cn/*',
+
   // tx
-  'https://y.qq.com/*',
+  '*://y.qq.com/*',
 
 
 ]
