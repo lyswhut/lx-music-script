@@ -71,7 +71,16 @@ let dom_main
 const injectBtn = async(callback) => {
   const dom_btn = document.querySelector('.btns button')
   if (!dom_btn) {
-    const current_dom_main = document.querySelector('#__layout > .page > .container > div')
+    let mains = document.querySelectorAll('#__layout > .page > .container > *')
+    if (!mains.length) return
+    mains = Array.from(mains)
+    let current_dom_main
+    for (const dom of mains) {
+      if (dom.nodeType == 1) {
+        current_dom_main = dom
+        break
+      }
+    }
     if (!current_dom_main) return
     dom_main = current_dom_main
     current_dom_main.addEventListener('DOMNodeRemoved', () => {
