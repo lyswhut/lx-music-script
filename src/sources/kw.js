@@ -144,9 +144,10 @@ const hadnleInject = () => {
 }
 
 export default () => {
-  window.addEventListener('load', () => {
+  window.addEventListener('DOMContentLoaded', () => {
     injectStyle()
-
+  })
+  window.addEventListener('load', () => {
     if (window.location.pathname.includes('/playlist_detail/')) {
       // eslint-disable-next-line no-undef
       const detail = __NUXT__.data[0].playListInfo

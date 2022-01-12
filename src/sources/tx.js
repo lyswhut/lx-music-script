@@ -74,22 +74,57 @@ const injectStyle = () => {
   document.head.appendChild(style)
 }
 
-let dom_loading
 const injectBtn = async(callback) => {
   const dom_btn = document.querySelector('.data__actions a')
   if (!dom_btn) {
-    const current_dom_loading = document.querySelector('.mod_loading')
-    if (!current_dom_loading) return
-    dom_loading = current_dom_loading
-    current_dom_loading.addEventListener('DOMNodeRemoved', () => {
-      if (dom_loading !== current_dom_loading) return
-      dom_loading = null
+    let dom_loading = document.querySelector('.mod_loading')
+    console.log(dom_loading)
+    if (!dom_loading) return
+    let observer_app
+    let observer_wrap
+    const handleChange = (list) => {
+      // console.log(list)
+      observer_app?.disconnect()
+      observer_wrap?.disconnect()
+
+      // if (dom_loading !== current_dom_loading) return
+      // dom_loading = null
       setTimeout(() => {
         const dom_btn = document.querySelector('.data__actions a')
         if (!dom_btn) return
         callback(dom_btn)
       })
-    })
+    }
+    let dom_app = document.querySelector('#app')
+    // console.log(dom_app)
+    if (dom_app) {
+      observer_app = new window.MutationObserver(handleChange)
+      observer_app.observe(dom_app, {
+        attributes: false,
+        childList: true,
+        subtree: false,
+      })
+    }
+    let dom_wrap = document.querySelector('#app>.wrap')
+    // console.log(dom_wrap)
+    if (dom_wrap) {
+      observer_wrap = new window.MutationObserver(handleChange)
+      observer_wrap.observe(dom_wrap, {
+        attributes: false,
+        childList: true,
+        subtree: false,
+      })
+    }
+    // current_dom_loading.addEventListener('DOMNodeRemoved', () => {
+    //   console.log(dom_loading !== current_dom_loading)
+    //   if (dom_loading !== current_dom_loading) return
+    //   dom_loading = null
+    //   setTimeout(() => {
+    //     const dom_btn = document.querySelector('.data__actions a')
+    //     if (!dom_btn) return
+    //     callback(dom_btn)
+    //   })
+    // })
     return
   }
   callback(dom_btn)

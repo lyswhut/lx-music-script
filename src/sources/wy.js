@@ -212,19 +212,6 @@ export default () => {
           data = filterList(res)[0]
           hadnleInject()
         })
-        // eslint-disable-next-line no-undef
-        // const dom_songcid = document.getElementById('songcid')
-        // if (!dom_songcid || !dom_songcid.value) return
-        // request('get', `https://c.musicapp.migu.cn/MIGUM2.0/v1.0/content/resourceinfo.do?copyrightId=${dom_songcid.value}&resourceType=2`).then(response => {
-        //   if (response.code !== '000000') return
-        //   console.log(response)
-        //   const detail = response.resource[0]
-
-        //   data = filterListDetail([detail])[0]
-
-        //   console.log(data)
-        //   hadnleInject()
-        // })
       }
     })
   })
