@@ -92,6 +92,7 @@ const injectBtn = async(callback) => {
       setTimeout(() => {
         const dom_btn = document.querySelector('.data__actions a')
         if (!dom_btn) return
+        if (dom_btn.parentNode.querySelector('.lx-btn')) return
         callback(dom_btn)
       })
     }
@@ -127,10 +128,12 @@ const injectBtn = async(callback) => {
     // })
     return
   }
+  if (dom_btn.parentNode.querySelector('.lx-btn')) return
   callback(dom_btn)
 }
 
 const createBtn = (label, onClick, className = 'mod_btn_green') => {
+  className += ' lx-btn'
   const dom_a = document.createElement('a')
   dom_a.className = className
   dom_a.innerHTML = `<span class="btn__txt">${label}</span>`
@@ -138,7 +141,7 @@ const createBtn = (label, onClick, className = 'mod_btn_green') => {
   return dom_a
 }
 
-const inJectPlaylistPage = ({ id }) => {
+const injectPlaylistPage = ({ id }) => {
   injectBtn(dom_btn => {
     dom_btn.insertAdjacentElement('afterend', createBtn('在 LX Music 中打开', () => {
       openApp('songlist', 'open', {
@@ -155,7 +158,7 @@ const inJectPlaylistPage = ({ id }) => {
   })
 }
 
-const inJectSongDetailPage = (musicInfo) => {
+const injectSongDetailPage = (musicInfo) => {
   console.log(musicInfo)
   injectBtn((dom_btn) => {
     dom_btn.insertAdjacentElement('afterend', createBtn('在 LX Music 中播放', () => {
@@ -167,9 +170,9 @@ const inJectSongDetailPage = (musicInfo) => {
 const hadnleInject = () => {
   if (!data) return
   if (window.location.pathname.includes('/playlist/')) {
-    inJectPlaylistPage(data)
+    injectPlaylistPage(data)
   } else if (window.location.pathname.includes('/songDetail/')) {
-    inJectSongDetailPage(data)
+    injectSongDetailPage(data)
   }
 }
 

@@ -89,15 +89,18 @@ const injectBtn = async(callback) => {
       setTimeout(() => {
         const dom_btn = document.querySelector('.btns button')
         if (!dom_btn) return
+        if (dom_btn.parentNode.querySelector('.lx-btn')) return
         callback(dom_btn)
       })
     })
     return
   }
+  if (dom_btn.parentNode.querySelector('.lx-btn')) return
   callback(dom_btn)
 }
 
 const createBtn = (label, onClick, dataKeys, className = 'play bg_primary') => {
+  className += ' lx-btn'
   const dom_a = document.createElement('button')
   dom_a.className = className
   for (const key of dataKeys) dom_a.dataset[key] = ''
@@ -106,7 +109,7 @@ const createBtn = (label, onClick, dataKeys, className = 'play bg_primary') => {
   return dom_a
 }
 
-const inJectPlaylistPage = ({ id }) => {
+const injectPlaylistPage = ({ id }) => {
   injectBtn(dom_btn => {
     const dataKeys = Object.keys(dom_btn.dataset)
     dom_btn.insertAdjacentElement('afterend', createBtn('在 LX Music 中打开', () => {
@@ -124,7 +127,7 @@ const inJectPlaylistPage = ({ id }) => {
   })
 }
 
-const inJectSongDetailPage = (musicInfo) => {
+const injectSongDetailPage = (musicInfo) => {
   console.log(musicInfo)
   injectBtn((dom_btn) => {
     const dataKeys = Object.keys(dom_btn.dataset)
@@ -137,9 +140,9 @@ const inJectSongDetailPage = (musicInfo) => {
 const hadnleInject = () => {
   if (!data) return
   if (window.location.pathname.includes('/playlist_detail/')) {
-    inJectPlaylistPage(data)
+    injectPlaylistPage(data)
   } else if (window.location.pathname.includes('/play_detail/')) {
-    inJectSongDetailPage(data)
+    injectSongDetailPage(data)
   }
 }
 

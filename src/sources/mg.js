@@ -96,7 +96,7 @@ const createPlaylistBtn = (label, onClick, className = 'play-all') => {
   dom_a.addEventListener('click', onClick)
   return dom_a
 }
-const inJectPlaylistPage = ({ id }) => {
+const injectPlaylistPage = ({ id }) => {
   const dom_btn = document.querySelector('.actions .action')
   if (!dom_btn) return
   dom_btn.insertAdjacentElement('afterend', createPlaylistBtn('在 LX Music 中打开', () => {
@@ -120,7 +120,7 @@ const createSongDetailBtn = (label, onClick, className = 'primary') => {
   dom_a.addEventListener('click', onClick)
   return dom_a
 }
-const inJectSongDetailPage = (musicInfo) => {
+const injectSongDetailPage = (musicInfo) => {
   console.log(musicInfo)
   const dom_btn = document.querySelector('.info_operate .operate_btn')
   if (!dom_btn) return
@@ -132,9 +132,9 @@ const inJectSongDetailPage = (musicInfo) => {
 const hadnleInject = () => {
   if (!data) return
   if (window.location.pathname.includes('/music/playlist/')) {
-    inJectPlaylistPage(data)
+    injectPlaylistPage(data)
   } else if (window.location.pathname.includes('/music/song/')) {
-    inJectSongDetailPage(data)
+    injectSongDetailPage(data)
   }
 }
 

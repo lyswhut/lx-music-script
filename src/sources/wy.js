@@ -92,7 +92,7 @@ const createBtn = (label, onClick, className = 'u-btn2 u-btn2-2 u-btni-addply f-
   return dom_a
 }
 
-const inJectPlaylistPage = ({ id }) => {
+const injectPlaylistPage = ({ id }) => {
   const dom_btn = injectBtn()
   if (!dom_btn) return
 
@@ -110,7 +110,7 @@ const inJectPlaylistPage = ({ id }) => {
   }))
 }
 
-const inJectSongDetailPage = (musicInfo) => {
+const injectSongDetailPage = (musicInfo) => {
   console.log(musicInfo)
   const dom_btn = injectBtn()
   if (!dom_btn) return
@@ -122,9 +122,9 @@ const inJectSongDetailPage = (musicInfo) => {
 const hadnleInject = () => {
   if (!data) return
   if (dom_iframe.contentWindow.location.href.includes('/playlist?')) {
-    inJectPlaylistPage(data)
+    injectPlaylistPage(data)
   } else if (dom_iframe.contentWindow.location.href.includes('/song?')) {
-    inJectSongDetailPage(data)
+    injectSongDetailPage(data)
   }
 }
 
