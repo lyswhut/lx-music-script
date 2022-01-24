@@ -48,8 +48,9 @@ module.exports = {
 // @run-at       document-start
 // @noframes
 // @icon         https://www.google.com/s2/favicons?domain=qq.com
-// @grant        GM_cookie
+// @grant        none
 // ==/UserScript==`,
+      // @grant        GM_cookie
       raw: true,
     }),
     new webpack.DefinePlugin({
