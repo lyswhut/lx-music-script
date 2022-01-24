@@ -81,7 +81,8 @@ const filterListDetail = (rawList) => {
 
 const injectStyle = () => {
   const style = document.createElement('style')
-  style.innerHTML = `.info_operate {white-space: nowrap;}
+  style.innerHTML = `.content .actions> * {margin-bottom: .8em;}
+    .info_operate {white-space: nowrap;}
     .info_operate .operate_btn.primary {border: 1px solid #e91e63 !important; background-color: #e91e63 !important; cursor: pointer;}
     .info_operate .operate_btn.primary:hover {background-color: #d81558 !important;}
     .info_operate .operate_btn.primary a {color: #fff !important;}`

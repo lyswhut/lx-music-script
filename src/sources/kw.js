@@ -63,7 +63,7 @@ const filterListDetail = (rawList) => {
 
 const injectStyle = () => {
   const style = document.createElement('style')
-  style.innerHTML = '.btns {white-space: nowrap;} .btns .play { width: auto !important;} '
+  style.innerHTML = '.btns {white-space: nowrap; flex-wrap: wrap;} .btns button{margin-bottom: 10px;} .btns .play { width: auto !important;} '
   document.head.appendChild(style)
 }
 
