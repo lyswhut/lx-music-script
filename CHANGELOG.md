@@ -6,6 +6,12 @@ Project versioning adheres to [Semantic Versioning](http://semver.org/).
 Commit convention is based on [Conventional Commits](http://conventionalcommits.org).
 Change log format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.2.5](https://github.com/lyswhut/lx-music-script/compare/v0.2.4...v0.2.5) - 2022-01-24
+
+### 优化
+
+- 注入按钮后，按钮栏在宽度不足的时候让按钮自动换行
+
 ## [0.2.4](https://github.com/lyswhut/lx-music-script/compare/v0.2.3...v0.2.4) - 2022-01-16
 
 ### 修复
