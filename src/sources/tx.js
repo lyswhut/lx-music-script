@@ -71,6 +71,7 @@ const filterListDetail = (rawList) => {
 const injectStyle = () => {
   const style = document.createElement('style')
   style.innerHTML = ` .data__cont{position: relative;}
+                      .data__info { overflow: hidden; }
                       .data__actions {position: relative; bottom: initial; white-space: nowrap; display: flex; flex-wrap: wrap; margin-top: 6px;} 
                       .mod_btn, .mod_btn_green{ margin-bottom: 6px; } `
   document.head.appendChild(style)
