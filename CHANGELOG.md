@@ -6,6 +6,12 @@ Project versioning adheres to [Semantic Versioning](http://semver.org/).
 Commit convention is based on [Conventional Commits](http://conventionalcommits.org).
 Change log format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.2.8](https://github.com/lyswhut/lx-music-script/compare/v0.2.7...v0.2.8) - 2022-03-03
+
+### 修复
+
+- 修复tx源的歌手详情页样式覆盖问题
+
 ## [0.2.7](https://github.com/lyswhut/lx-music-script/compare/v0.2.6...v0.2.7) - 2022-03-03
 
 ### 修复
