@@ -72,7 +72,7 @@ const injectStyle = () => {
   const style = document.createElement('style')
   style.innerHTML = ` .data__cont{position: relative;}
                       .data__info { overflow: hidden; }
-                      .singer_exclusive .mod_data_statistic { height: auto; } /** 修复歌手页排版问题 **/
+                      .singer_exclusive .mod_data_statistic { height: auto !important; } /** 修复歌手页排版问题 **/
                       .data__actions {position: relative; bottom: initial !important; white-space: nowrap; display: flex; flex-wrap: wrap; margin-top: 6px;} 
                       .mod_btn, .mod_btn_green{ margin-bottom: 6px; } `
   document.head.appendChild(style)
