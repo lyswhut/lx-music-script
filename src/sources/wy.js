@@ -75,13 +75,14 @@ const filterList = ({ songs, privileges }) => {
 
 const injectStyle = () => {
   const style = dom_iframe.contentWindow.document.createElement('style')
-  style.innerHTML = '.btns > a {margin-bottom: 6px;} .margin-right { margin-right: 5px; } '
+  style.innerHTML = '.btns{display: flex; flex-flow: row wrap;} .btns > a {margin-bottom: 6px;} .margin-right { margin-right: 5px; }'
   dom_iframe.contentWindow.document.head.appendChild(style)
 }
 
 const injectBtn = () => {
   let dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-add')
   if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-vip-btn-group')
+  if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-openvipply')
   return dom_btn
 }
 
