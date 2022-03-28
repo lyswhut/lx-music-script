@@ -80,7 +80,8 @@ const injectStyle = () => {
 }
 
 const injectBtn = () => {
-  const dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-add')
+  let dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-add')
+  if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-vip-btn-group')
   return dom_btn
 }
 
