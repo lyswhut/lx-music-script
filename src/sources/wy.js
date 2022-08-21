@@ -83,6 +83,7 @@ const injectBtn = () => {
   let dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-add')
   if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-vip-btn-group')
   if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-openvipply')
+  if (!dom_btn) dom_btn = dom_iframe.contentWindow.document.querySelector('.btns .u-btni-play')
   return dom_btn
 }
 
