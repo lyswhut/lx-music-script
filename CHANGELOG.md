@@ -6,6 +6,16 @@ Project versioning adheres to [Semantic Versioning](http://semver.org/).
 Commit convention is based on [Conventional Commits](http://conventionalcommits.org).
 Change log format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.2.13](https://github.com/lyswhut/lx-music-script/compare/v0.2.12...v0.2.13) - 2023-01-18
+
+### 修复
+
+- 兼容v2.0.0版本将歌曲音质支持类似从 flac32bit 改为 flac24bit 的问题
+
+### 其他
+
+- 由于greasyfork不允许使用压缩后的代码，现将forge切换到未压缩的版本
+
 ## [0.2.12](https://github.com/lyswhut/lx-music-script/compare/v0.2.11...v0.2.12) - 2022-08-21
 
 ### 优化
