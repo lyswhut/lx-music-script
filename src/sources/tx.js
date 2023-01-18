@@ -38,6 +38,12 @@ const filterListDetail = (rawList) => {
     }
     if (item.file.size_hires !== 0) {
       let size = sizeFormate(item.file.size_hires)
+      types.push({ type: 'flac24bit', size })
+      _types.flac24bit = {
+        size,
+      }
+
+      // 兼容2.0.0版本之前的 hires 音质使用 flac32bit 名字的问题
       types.push({ type: 'flac32bit', size })
       _types.flac32bit = {
         size,

@@ -43,6 +43,12 @@ const filterListDetail = (rawList) => {
       }
     }
     if (formats.includes('HIRFLAC')) {
+      types.push({ type: 'flac24bit', size: null })
+      _types.flac24bit = {
+        size: null,
+      }
+
+      // 兼容2.0.0版本之前的 hires 音质使用 flac32bit 名字的问题
       types.push({ type: 'flac32bit', size: null })
       _types.flac32bit = {
         size: null,

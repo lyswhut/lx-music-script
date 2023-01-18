@@ -45,6 +45,12 @@ const filterListDetail = (rawList) => {
           }
           break
         case 'ZQ':
+          types.push({ type: 'flac24bit', size })
+          _types.flac24bit = {
+            size,
+          }
+
+          // 兼容2.0.0版本之前的 hires 音质使用 flac32bit 名字的问题
           size = sizeFormate(type.size)
           types.push({ type: 'flac32bit', size })
           _types.flac32bit = {
