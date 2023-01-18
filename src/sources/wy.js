@@ -1,5 +1,5 @@
+import forge from 'node-forge'
 import { sizeFormate, formatPlayTime, request, openApp } from '@/utils'
-import forge from '@/vendors/forge.min'
 
 let data = null
 
