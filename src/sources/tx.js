@@ -269,7 +269,7 @@ export default () => {
       }
       let detail
       for (const value of Object.values(response)) {
-        if (value?.data?.track_info) {
+        if (value?.data?.track_info?.file) {
           detail = value.data.track_info
           break
         }
