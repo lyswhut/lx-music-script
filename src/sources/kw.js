@@ -1,4 +1,4 @@
-import { decodeName, formatPlayTime, requestHook, openApp } from '@/utils'
+import { decodeName, formatPlayTime, requestHook, openApp, request } from '@/utils'
 
 let data = null
 
@@ -158,6 +158,25 @@ const hadnleInject = () => {
   }
 }
 
+let prevId = ''
+const getMusicInfo = async() => {
+  const id = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
+  if (!id || prevId == id) return
+  prevId = id
+  const resp = await request('get', `//kuwo.cn/newh5/singles/songinfoandlrc?musicId=${id}`).catch(_ => null)
+  if (!resp || resp.status != 200) {
+    prevId = ''
+    data = null
+    return
+  }
+  let detail = resp.data.songinfo
+  data = filterListDetail([detail])[0]
+  console.log(data)
+  setTimeout(() => {
+    hadnleInject()
+  })
+}
+
 export default () => {
   window.addEventListener('DOMContentLoaded', () => {
     injectStyle()
@@ -177,6 +196,8 @@ export default () => {
       }
       console.log(data)
       hadnleInject()
+    } else if (window.location.pathname.includes('/play_detail/')) {
+      getMusicInfo()
     }
   })
   // window.history.pushState = ((f) =>
@@ -223,17 +244,18 @@ export default () => {
       setTimeout(() => {
         hadnleInject()
       })
-    } else if (url.includes('singles/songinfoandlrc')) {
-      if (response.status != 200) {
-        data = null
-        return
-      }
-      let detail = response.data.songinfo
-      data = filterListDetail([detail])[0]
-      console.log(data)
-      setTimeout(() => {
-        hadnleInject()
-      })
+    } else if (url.includes('music/musicInfo')) {
+      getMusicInfo()
+      // if (response.status != 200) {
+      //   data = null
+      //   return
+      // }
+      // let detail = response.data.songinfo
+      // data = filterListDetail([detail])[0]
+      // console.log(data)
+      // setTimeout(() => {
+      //   hadnleInject()
+      // })
     }
   })
 }
