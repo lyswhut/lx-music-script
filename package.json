@@ -1,7 +1,7 @@
 {
   "name": "lx-music-script",
   "version": "0.2.15",
-  "description": "lx-msuic 辅助脚本，提供在官方音乐平台歌单、歌曲详情页直接调用LX Music的能力。",
+  "description": "LX Music 辅助脚本，提供在官方平台歌单、歌曲详情页直接调用 LX Music 的能力。",
   "publishConfig": {
     "access": "public"
   },
