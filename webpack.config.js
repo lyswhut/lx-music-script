@@ -38,7 +38,7 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin({
       banner: `// ==UserScript==
-// @name         lx-msuic 辅助脚本
+// @name         LX Music 辅助脚本
 // @namespace    ${packageJson.name}
 // @version      ${packageJson.version}
 // @author       ${packageJson.author}

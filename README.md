@@ -8,7 +8,7 @@ LX Music 辅助脚本，提供在官方平台歌单、歌曲详情页直接调�
 
 这是一个油猴脚本，需要配合 [Tampermonkey](https://www.tampermonkey.net/) 使用。
 
-在安装 Tampermonkey 扩展后，你可以前往 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/438148-lx-msuic-%E8%BE%85%E5%8A%A9%E8%84%9A%E6%9C%AC) 安装此脚本。
+在安装 Tampermonkey 扩展后，你可以前往 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/438148) 安装此脚本。
 
 ## 使用
 
