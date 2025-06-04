@@ -1,4 +1,4 @@
-import { sizeFormate, formatPlayTime, requestHook, openApp } from '@/utils'
+import { sizeFormate, formatPlayTime, openApp } from '@/utils'
 
 let data = null
 
@@ -187,50 +187,8 @@ const hadnleInject = () => {
 }
 
 export default () => {
-  window.addEventListener('load', () => {
-    injectStyle()
-
-    if (window.location.pathname.includes('/playlist/')) {
-      // eslint-disable-next-line no-undef
-      const detail = __INITIAL_DATA__.detail
-      data = {
-        play_count: detail.listennum,
-        id: detail.id,
-        author: detail.host_nick,
-        name: detail.title,
-        img: detail.picurl,
-        desc: detail.desc,
-        source: 'tx',
-      }
-    } else if (window.location.pathname.includes('/songDetail/')) {
-      // eslint-disable-next-line no-undef
-      data = filterListDetail(__INITIAL_DATA__.songList)[0]
-    }
-    hadnleInject()
-  })
-  // window.history.pushState = ((f) =>
-  //   function pushState() {
-  //     const ret = f.apply(this, arguments)
-  //     window.dispatchEvent(new window.Event('pushstate'))
-  //     window.dispatchEvent(new window.Event('locationchange'))
-  //     return ret
-  //   })(window.history.pushState)
-
-  // window.history.replaceState = ((f) =>
-  //   function replaceState() {
-  //     const ret = f.apply(this, arguments)
-  //     window.dispatchEvent(new window.Event('replacestate'))
-  //     window.dispatchEvent(new window.Event('locationchange'))
-  //     return ret
-  //   })(window.history.replaceState)
-
-  // window.addEventListener('popstate', () => {
-  //   window.dispatchEvent(new window.Event('locationchange'))
-  // })
-  // window.addEventListener('locationchange', function() {
-
-  // })
-  requestHook((url, requestBody, response) => {
+  injectStyle()
+  const requestHook = (requestBody, response) => {
     if (!requestBody) return
     if (
       requestBody.includes('"module":"music.srfDissInfo.aiDissInfo"') &&
@@ -240,13 +198,7 @@ export default () => {
         data = null
         return
       }
-      let detail
-      for (const value of Object.values(response)) {
-        if (value?.data?.dirinfo) {
-          detail = value.data.dirinfo
-          break
-        }
-      }
+      let detail = response.data.dirinfo
       data = {
         play_count: detail.listennum,
         id: detail.id,
@@ -267,17 +219,95 @@ export default () => {
         data = null
         return
       }
-      let detail
-      for (const value of Object.values(response)) {
-        if (value?.data?.track_info?.file) {
-          detail = value.data.track_info
-          break
-        }
-      }
-      data = filterListDetail([detail])[0]
+      data = filterListDetail([response.data.track_info])[0]
       setTimeout(() => {
         hadnleInject()
       })
     }
-  })
+  }
+  let hooked = false
+
+  const hookRequestMod = async() => {
+    const getRequestModId = () => {
+      if (typeof window.webpackJsonp === 'undefined') {
+        throw new Error('window.webpackJsonp 为空，请到 github 提交 issue 反馈！')
+      }
+      const jsonp = window.webpackJsonp
+      if (!Array.isArray(jsonp)) {
+        throw new Error('window.webpackJsonp 不是有效的模块数组，请到 github 提交 issue 反馈！')
+      }
+
+      for (const item of jsonp) {
+        if (!Array.isArray(item) || item.length < 2) continue
+
+        const modules = item[1] // 模块定义对象
+
+        if (typeof modules === 'object') {
+          for (const [id, fn] of Object.entries(modules)) {
+            if (typeof fn === 'function') {
+              if (fn.toString().includes('this.sendRequest')) {
+                return id
+              }
+            }
+          }
+        }
+      }
+    }
+    const get__webpack_require__ = async() => {
+      return new Promise((resolve) => {
+        window.webpackJsonp.push([
+          [9999999],
+          {
+            fake_mod: function(module, exports, __req__) {
+              resolve(__req__)
+            },
+          },
+          [['fake_mod']],
+        ])
+      })
+    }
+    const hookReq = (mod) => {
+      let oldReq = mod.request.bind(mod)
+      mod.request = (opts) => {
+        // console.log('opts', opts)
+        return oldReq(opts).then((response) => {
+          // console.log('response', response)
+          if (!Array.isArray(opts)) {
+            requestHook(JSON.stringify(opts), response)
+            return response
+          }
+          opts.forEach((req, idx) => {
+            requestHook(JSON.stringify(req), response[idx])
+          })
+          return response
+        })
+      }
+    }
+
+    const modId = getRequestModId()
+    if (!modId) return
+    hooked = true
+    const __webpack_require__ = await get__webpack_require__()
+    const mod = __webpack_require__(modId)
+    // Object(mod.j)
+    for (const [k, fn] of Object.entries(mod)) {
+      if (typeof fn == 'function' && fn.toString().startsWith('function(){return ')) {
+        return hookReq(Object(mod[k])())
+      }
+    }
+  }
+  const hookWebpackJsonp = () => {
+    let val = window.webpackJsonp
+    Object.defineProperty(window, 'webpackJsonp', {
+      get() {
+        return val
+      },
+      set(value) {
+        val = value
+        if (hooked) return
+        hookRequestMod()
+      },
+    })
+  }
+  hookWebpackJsonp()
 }
