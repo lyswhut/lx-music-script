@@ -6,6 +6,19 @@ Project versioning adheres to [Semantic Versioning](http://semver.org/).
 Commit convention is based on [Conventional Commits](http://conventionalcommits.org).
 Change log format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.2.16](https://github.com/lyswhut/lx-music-script/compare/v0.2.15...v0.2.16) - 2025-06-05
+
+### 修复
+
+- 修复 tx 注入失效的问题
+- 修复 mg 注入失效的问题
+
+## [0.2.15](https://github.com/lyswhut/lx-music-script/compare/v0.2.14...v0.2.15) - 2024-02-28
+
+### 修复
+
+- 修复kw歌曲详情页按钮注入失效的问题
+
 ## [0.2.14](https://github.com/lyswhut/lx-music-script/compare/v0.2.13...v0.2.14) - 2023-08-07
 
 ### 修复

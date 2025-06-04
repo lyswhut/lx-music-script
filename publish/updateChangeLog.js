@@ -3,17 +3,17 @@ const { jp, formatTime } = require('./utils')
 const pkgDir = '../package.json'
 const pkg = require(pkgDir)
 const chalk = require('chalk')
-const parseChangelog = require('changelog-parser')
+const { parseChangelog } = require('./parseChangelog')
 const changelogPath = jp('../CHANGELOG.md')
 
-const getPrevVer = () => parseChangelog(changelogPath).then(res => {
-  if (!res.versions.length) throw new Error('CHANGELOG 无法解析到版本号')
-  return res.versions[0].version
-})
+const getPrevVer = (changeLog) => {
+  const versions = parseChangelog(changeLog)
+  return versions[0].version
+}
 
 const updateChangeLog = async(newVerNum, newChangeLog) => {
   let changeLog = fs.readFileSync(changelogPath, 'utf-8')
-  const prevVer = await getPrevVer()
+  const prevVer = await getPrevVer(changeLog)
   const log = `## [${newVerNum}](${pkg.repository.url.replace(/^git\+(http.+)\.git$/, '$1')}/compare/v${prevVer}...v${newVerNum}) - ${formatTime()}\n\n${newChangeLog}`
   fs.writeFileSync(changelogPath, changeLog.replace(/(## [?0.1.1]?)/, log + '\n$1'), 'utf-8')
 }
