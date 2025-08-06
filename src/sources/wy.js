@@ -3,7 +3,7 @@ import { sizeFormate, formatPlayTime, request, openApp } from '@/utils'
 
 let data = null
 
-const idRxp = /id=(\d+)/
+const idRxp = /(?:id=|(?:song|playlist)\/)(\d+)/
 
 let dom_iframe
 
@@ -126,7 +126,7 @@ const hadnleInject = () => {
   if (!data) return
   if (dom_iframe.contentWindow.location.href.includes('/playlist?')) {
     injectPlaylistPage(data)
-  } else if (dom_iframe.contentWindow.location.href.includes('/song?')) {
+  } else if (/\/song(\?|\/)/.test(dom_iframe.contentWindow.location.href)) {
     injectSongDetailPage(data)
   }
 }
@@ -205,7 +205,7 @@ export default () => {
           source: 'wy',
         }
         hadnleInject()
-      } else if (dom_iframe.contentWindow.location.href.includes('/song?')) {
+      } else if (/\/song(\?|\/)/.test(dom_iframe.contentWindow.location.href)) {
         if (!idRxp.test(dom_iframe.contentWindow.location.href)) return
         const id = RegExp.$1
         wyWeapiRequest('POST', 'https://music.163.com/weapi/v3/song/detail', {
