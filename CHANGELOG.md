@@ -6,6 +6,12 @@ Project versioning adheres to [Semantic Versioning](http://semver.org/).
 Commit convention is based on [Conventional Commits](http://conventionalcommits.org).
 Change log format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.2.18](https://github.com/lyswhut/lx-music-script/compare/v0.2.17...v0.2.18) - 2025-10-16
+
+### 修复
+
+- 修复 mg 歌单详情注入按钮显示问题
+
 ## [0.2.17](https://github.com/lyswhut/lx-music-script/compare/v0.2.16...v0.2.17) - 2025-08-06
 
 ### 修复
