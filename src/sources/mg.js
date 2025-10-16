@@ -147,7 +147,8 @@ const injectPlaylistPage = ({ id }) => {
   }
   document.querySelector('.song-handle .options').addEventListener('DOMNodeRemoved', handleRemove)
 
-  const v = Object.keys(dom_btn.dataset).find(key => key.startsWith('v-'))
+  const keys = Object.keys(dom_btn.dataset)
+  const v = keys.find(key => key.startsWith('v-')) || keys.find(key => key.startsWith('v') && key.charAt(1) != key.charAt(1).toLowerCase())
   dom_btn.insertAdjacentElement('afterend', createPlaylistBtn(v, '在 LX Music 中打开', (evt) => {
     evt.stopImmediatePropagation()
     evt.stopPropagation()
